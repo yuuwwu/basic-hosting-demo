@@ -1,3 +1,4 @@
+"""API Contract for Query Service"""
 from typing import List
 from pydantic import BaseModel, Field
 

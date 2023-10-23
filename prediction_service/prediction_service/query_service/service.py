@@ -16,7 +16,7 @@ LOGGER_PREFIX = "QUERY_SERVICE"
 
 class QueryService(FastAPIServiceBase):
     """
-    TODO
+    Service to return top k predictions for a given query
     """
 
     def __init__(self, *args, **kwargs):
@@ -30,16 +30,20 @@ class QueryService(FastAPIServiceBase):
         self.model = None
 
     async def initialize(self):
+        """
+        Service initialization, load model, init model
+        """
         LOGGER.info(
             f"{LOGGER_PREFIX} - {self.__class__.__name__}.initialize method called."
         )
         self.app.add_api_route(path="/predict", endpoint=self.predict, methods=["POST"])
+
         await self.load_model()
         self.model = rt.InferenceSession(self.mode_dir)
 
     async def load_model(self):
         """
-        TODO
+        Load model from S3 url.
         """
         try:
             await download_file_async(url=self.model_url, destination=self.mode_dir)
@@ -48,9 +52,14 @@ class QueryService(FastAPIServiceBase):
             LOGGER.error(f"{LOGGER_PREFIX} - Failed to load model", exc_info=True)
             raise
 
-    async def predict(self, user_request: PostQueryRequest):
+    async def predict(self, user_request: PostQueryRequest) -> PostQueryResponse:
         """
-        TODO
+        Run prediction on the model and return top k predictions based on user request.
+
+        Args:
+            user_request (PostQueryRequest): User request object with query and top_k.
+        Returns:
+            PostQueryResponse: Response object with query, predicted cats and probas.
         """
         query = user_request.query
         top_k = user_request.top_k

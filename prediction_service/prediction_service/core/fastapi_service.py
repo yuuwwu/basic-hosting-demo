@@ -57,7 +57,8 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 
 class FastAPIServiceBase:
     """
-    TODO
+    A base class for FastAPI services. This class provides a framework and common tasks.
+    Currently pretty barebones, but it can be extended to handle common tasks for serving ML models.
     """
 
     def __init__(
@@ -179,7 +180,7 @@ class FastAPIServiceBase:
         as a Kubernetes liveness/readiness check.
 
         Returns:
-            StatusResponse: StatusMessage with worker status
+            StatusResponse: StatusMessage with status
         Raises:
             DefaultBadRequest: If the endpoint is not ready.
         """
@@ -219,7 +220,7 @@ class FastAPIServiceBase:
         error_response = DefaultErrorResponse(
             httpStatusCode=http_status_code,
             httpMessage=http_message,
-            # api_state=self.api_state,
+            api_state=self.api_state,
             description=description,
             details=error_message,
         )
