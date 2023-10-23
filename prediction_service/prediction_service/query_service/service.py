@@ -4,10 +4,7 @@ from logging.config import fileConfig
 import onnxruntime as rt
 from prediction_service.core.fastapi_service import FastAPIServiceBase, FastAPIStateEnum
 from prediction_service.query_service.schema import PostQueryRequest, PostQueryResponse
-from prediction_service.query_service.utils import (
-    download_model_from_url,
-    download_file_async,
-)
+from prediction_service.query_service.utils import download_file_async
 
 fileConfig("logging.ini")
 LOGGER = logging.getLogger()
