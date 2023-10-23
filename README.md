@@ -96,6 +96,7 @@ Example uses conda but other alternatives works as well.
     ```
   
   Load testing note:
+  
   I observed that service running in minikube yeilds much worse performance than running locally.
   It doesn't look like resource allocation related, potentially due to overhead and networking. 
   This is never observed in a EKS cluster. Will need more time to get to the bottom of it.
@@ -107,7 +108,7 @@ Example uses conda but other alternatives works as well.
   ![Load test 100rps](images/95rps.png)
 
   - Load test with minikube
-  ![Load test with nimikube](images/minikube 60.png)
+  ![Load test with nimikube](images/minikube_60.png)
 
 
 ## Dashboard
