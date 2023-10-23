@@ -1,0 +1,44 @@
+# LoadBalancer
+apiVersion: v1
+kind: Service
+metadata:
+  name: baisc-hosting-demo-svc
+spec:
+  selector:
+    app: baisc-hosting-demo
+  ports:
+    - protocol: "TCP"
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer
+
+---
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: baisc-hosting-demo
+  labels:
+    app: baisc-hosting-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: baisc-hosting-demo
+  template:
+    metadata:
+      labels:
+        app: baisc-hosting-demo
+    spec:
+      containers:
+        - name: baisc-hosting-demo
+          image: yuuwwu/bastic_hosting_demo:0.0.1
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "1000m"
+              memory: "8000Mi"
+            limits:
+              memory: "8000Mi"

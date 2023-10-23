@@ -1,0 +1,12 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: baisc-hosting-demo-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: baisc-hosting-demo
+  minReplicas: 1
+  maxReplicas: 12
+  targetCPUUtilizationPercentage: 50
